@@ -5,12 +5,12 @@ import com.investing.domain.User;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Set;
 
-public class Notification  implements Serializable {
+public class Notification{
 
-    private static final long serialVersionUID = -3686472195559526951L;
     private Stock from;
-    private ArrayList<User> to;
+    private Set<User> to;
     private String title, body;
 
     public Stock getFrom() {
@@ -22,21 +22,21 @@ public class Notification  implements Serializable {
         return this;
     }
 
-    public ArrayList<User> getTo() {
+    public Set<User> getTo() {
         return to;
     }
 
-    public Notification setTo(ArrayList<User> to) {
+    public Notification setTo(Set<User> to) {
         this.to = to;
         return this;
     }
 
-    public Notification setTo(User to) {
-        ArrayList<User> toList = new ArrayList<>();
-        toList.add(to);
-        setTo(toList);
-        return this;
-    }
+//    public Notification setTo(User to) {
+//        ArrayList<User> toList = new ArrayList<>();
+//        toList.add(to);
+//        setTo(toList);
+//        return this;
+//    }
 
     public String getTitle() {
         return title;
@@ -58,15 +58,15 @@ public class Notification  implements Serializable {
 
     @Override
     public String toString() {
-        ArrayList<User> users = getTo();
+       Set<User> users = getTo();
         StringBuilder usersTo = new StringBuilder();
         for (User c : users) {
-            usersTo.append(c);
+            usersTo.append(c.getName());
         }
 
-        return "SEND Notification:" + "\n" +
-                "Stock: " + getFrom() +
-                "To: " + usersTo +
+        return "SEND NOTIFICATION:" + "\n" +
+                "Stock: " + getFrom().getName()+ "\n"+
+                "To: " + usersTo+ "\n" +
                 "Title: " + getTitle() + "\n" +
                 "Body: " + getBody() + "\n";
     }

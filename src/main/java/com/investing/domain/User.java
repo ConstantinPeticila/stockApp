@@ -10,8 +10,9 @@ import java.util.Objects;
 public class User {
 	private String name;
 	private Gender gender;
-	private String city;
+
 	private UserAccount account;
+
 	//map cu stockurile si numarul de actiuni pentru fiecare
 	private Map<Stock, Double> trades= new HashMap<>();
 
@@ -19,12 +20,6 @@ public class User {
 	public User(String name, Gender gender) {
 		this.name = name;
 		this.gender = gender;
-	}
-
-	public User(String name, Gender gender, String city) {
-		this.name = name;
-		this.gender = gender;
-		this.city = city;
 		this.account = new UserAccount();
 	}
 
@@ -49,9 +44,9 @@ public class User {
 		this.account.stockInvest(amount);
 	}
 
-//	public void addInterest(Stock stock){
-//		stock.attach(this);
-//	}
+	public void addInterest(Stock stock){
+		stock.attach(this);
+	}
 
 	public Double check(Stock stock) throws NotEnoughFundsException {
 
@@ -88,9 +83,6 @@ public class User {
 				.mapToDouble(stock -> stock.getKey().getPrice()*stock.getValue())
 				.sum();
 	}
-	public void setCity(String city) {
-		this.city = city;
-	}
 
 	public UserAccount getAccount() {
 		return account;
@@ -108,9 +100,6 @@ public class User {
 		return gender;
 	}
 
-	public String getCity() {
-		return city;
-	}
 
 	public String getClientGreeting() {
 		if (gender != null) {
@@ -121,20 +110,6 @@ public class User {
 	}
 
 
-
-//	@Override
-//	public String toString() {
-//		StringBuffer stringBuffer = new StringBuffer();
-//		stringBuffer.append("{");
-//		accounts.forEach(account -> stringBuffer.append(account.toString() + ","));
-//		stringBuffer.setLength(stringBuffer.length()-1);
-//		stringBuffer.append("}");
-//		return "Client{" +
-//				"name='" + name + '\'' +
-//				", gender=" + gender +
-//				", accounts=" + stringBuffer +
-//				'}';
-//	}
 
 	@Override
 	public boolean equals(Object o) {
@@ -155,7 +130,6 @@ public class User {
 		return "User{" +
 				"name='" + name + '\'' +
 				", gender=" + gender +
-				", city='" + city + '\'' +
 				", account=" + account +
 				", trades=" + trades +
 				'}';

@@ -1,11 +1,16 @@
 package com.investing.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class Stock {
 
-    private List<User> observers = new ArrayList<User>();
+    public Set<User> getObservers() {
+        return observers;
+    }
+
+    private Set<User> observers = new HashSet<>();
 
     public Stock(String name, Double price) {
         this.name = name;
@@ -31,7 +36,6 @@ public class Stock {
     }
 
     public void setSoldActions(Double soldActions) {
-        setLastPrice(this.soldActions);
         this.soldActions = soldActions;
     }
 
@@ -48,20 +52,13 @@ public class Stock {
     }
 
     public void setPrice(Double price) {
+        setLastPrice(this.price);
         this.price = price;
-//        notifyAllUsers();
     }
 
     public void attach(User user){
         observers.add(user);
     }
-
-   /* private void notifyAllUsers() {
-
-        for (User user: observers) {
-            //user.update();
-        }
-    }*/
 
     public Double getLastPrice() {
         return lastPrice;

@@ -20,10 +20,6 @@ public class NotificationService implements Runnable, Serializable {
             if(closed) {
                 return;
             }
-
-            if ((notification = notifQueue.get()) != null) {
-                sendNotification(notification);
-            }
             try {
                 synchronized(notifQueue) {
                     notifQueue.wait();
@@ -31,6 +27,10 @@ public class NotificationService implements Runnable, Serializable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 return;
+            }
+
+            if ((notification = notifQueue.get()) != null) {
+                sendNotification(notification);
             }
 
         }

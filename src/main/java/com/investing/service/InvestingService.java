@@ -87,9 +87,9 @@ public class InvestingService {
         });
         System.out.println();
 
-        System.out.println("List of all clients grouped by city and ordered alphabetically by name:");
-        Map<String, List<User>> clientsByCity = AppReport.getUsersByCity(investingApp);
-        clientsByCity.forEach((city, listOfClients) -> System.out.println("From " + city + " are next clients: " + listOfClients));
+//        System.out.println("List of all clients grouped by city and ordered alphabetically by name:");
+//        Map<String, List<User>> clientsByCity = AppReport.getUsersByCity(investingApp);
+//        clientsByCity.forEach((city, listOfClients) -> System.out.println("From " + city + " are next clients: " + listOfClients));
         System.out.println("\n------------------------------------ End of the  STATISTICS ------------------------------------\n");
     }
 

@@ -43,10 +43,10 @@ public class InvestingAppTest {
 
 
     private List<User> generateClients() {
-        User user1 = new User("Smith John", Gender.MALE, "Bucuresti");
+        User user1 = new User("Smith John", Gender.MALE);
         user1.getAccount().deposit(1000.0);
 
-        User user2 = new User("Smith Michelle", Gender.FEMALE, "Bucuresti");
+        User user2 = new User("Smith Michelle", Gender.FEMALE);
         user2.getAccount().deposit(2000.0);
 
         return List.of(user1, user2);

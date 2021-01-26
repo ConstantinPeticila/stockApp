@@ -21,13 +21,13 @@ public class InvestingAppReportTest {
     @BeforeClass
     public static void generateBank() {
         investingApp = new InvestingApp();
-        for (User user : generateClients()) {
-            try {
-                investingApp.addUser(user);
-            } catch (UserExistsException e) {
-                e.printStackTrace();
-            }
-        }
+//        for (User user : generateClients()) {
+//            try {
+//                investingApp.addUser(user);
+//            } catch (UserExistsException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 
     @Test
@@ -83,24 +83,24 @@ public class InvestingAppReportTest {
 ////        assertEquals(2, customerAccounts.get(user1).size());
 ////    }
 
-    @Test
-    public void getClientsByCity() {
-        TreeMap<String, List<User>> clientsByCity = (TreeMap<String, List<User>>) AppReport.getUsersByCity(investingApp);
-        service.close();
-        assertEquals(2, clientsByCity.keySet().size());
-        assertEquals(2, clientsByCity.get("Bucuresti").size());
-        assertEquals("Bucuresti", clientsByCity.firstEntry().getKey());
-    }
+//    @Test
+//    public void getClientsByCity() {
+//        TreeMap<String, List<User>> clientsByCity = (TreeMap<String, List<User>>) AppReport.getUsersByCity(investingApp);
+//        service.close();
+//        assertEquals(2, clientsByCity.keySet().size());
+//        assertEquals(2, clientsByCity.get("Bucuresti").size());
+//        assertEquals("Bucuresti", clientsByCity.firstEntry().getKey());
+//    }
 
-
-    private static List<User> generateClients() {
-        User user1 = new User("Alex", Gender.MALE, "Bucuresti");
-        user1.getAccount().deposit(1000.0);
-        User user2 = new User("Cosmin", Gender.MALE, "Ploiesti");
-        user2.getAccount().deposit(200.0);
-        User user3 = new User("Edward", Gender.MALE, "Bucuresti");
-        user3.getAccount().deposit(2000.0);
-
-        return List.of(user1, user2, user3);
-    }
+//
+//    private static List<User> generateClients() {
+//        User user1 = new User("Alex", Gender.MALE, "Bucuresti");
+//        user1.getAccount().deposit(1000.0);
+//        User user2 = new User("Cosmin", Gender.MALE, "Ploiesti");
+//        user2.getAccount().deposit(200.0);
+//        User user3 = new User("Edward", Gender.MALE, "Bucuresti");
+//        user3.getAccount().deposit(2000.0);
+//
+//        return List.of(user1, user2, user3);
+//    }
 }

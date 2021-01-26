@@ -6,11 +6,13 @@ public class EmailService implements Runnable, Serializable {
 
     private static final long serialVersionUID = -6872857384878095572L;
     private final Queue emailQueue = new Queue();
+    private Thread thread;
     private boolean closed;
     private int sentEmails = 0;
 
     public EmailService() {
-        new Thread(this).start();
+        thread = new Thread(this);
+        thread.start();
     }
 
     @Override
@@ -21,18 +23,19 @@ public class EmailService implements Runnable, Serializable {
                 return;
             }
 
+
+            synchronized (emailQueue) {
+                try {
+                    emailQueue.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    return;
+                }
+            }
+
             if ((email = emailQueue.get()) != null) {
                 sendEmail(email);
             }
-            try {
-                synchronized(emailQueue) {
-                    emailQueue.wait();
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                return;
-            }
-
         }
     }
 
@@ -47,9 +50,9 @@ public class EmailService implements Runnable, Serializable {
 
     public void sendNotificationEmail(Email email) throws EmailException {
         if (!closed) {
-            emailQueue.add(email);
             synchronized(emailQueue) {
-                emailQueue.notify();
+                emailQueue.add(email);
+                emailQueue.notifyAll();
             }
         } else
             throw new EmailException("Mailbox is closed!");

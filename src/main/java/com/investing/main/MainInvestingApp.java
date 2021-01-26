@@ -9,14 +9,15 @@ import com.investing.email.EmailService;
 import com.investing.service.InvestingService;
 
 public class MainInvestingApp {
+
     private static final String STATISTICS = "statistics";
     private static InvestingApp investingApp;
     private static final EmailService emailService = new EmailService();
     private static final NotificationService notificationService = new NotificationService();
+
     public static void main(String[] args) {
         investingApp = new InvestingApp();
-        investingApp.setEmailService(emailService);
-        investingApp.setNotificationService(notificationService);
+        investingApp.setServices(emailService, notificationService);
 
         modifyApp();
         //printBalance();
@@ -34,12 +35,12 @@ public class MainInvestingApp {
 
 
     private static void modifyApp() {
-        User user1 = new User("John", Gender.MALE, "Bucuresti");
+        User user1 = new User("John", Gender.MALE);
 //        User user2 = new User("Alex", Gender.MALE, "Bucuresti");
         user1.getAccount().deposit(300);
         Stock stock1 = new Stock("Nio",34.0);
         try {
-            InvestingService.addUser(investingApp, user1);
+           investingApp.addUser(user1);
 //            InvestingService.addUser(investingApp, user2);
         } catch (UserExistsException e) {
             System.out.format("Cannot add an already existing client: %s%n", user1.getName());
@@ -83,7 +84,7 @@ public class MainInvestingApp {
     }
 
     private static void addUser(InvestingApp investingApp) {
-        User user = new User("Alex", Gender.MALE, "Ploiesti");
+        User user = new User("Alex", Gender.MALE);
         Stock stock= new Stock("Tesla",20.0);
         user.getAccount().deposit(300);
 

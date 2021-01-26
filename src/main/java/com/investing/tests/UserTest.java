@@ -22,7 +22,7 @@ public class UserTest {
     public void equals_ShouldReturnFalse_IfIsReceivedAClientWithDifferentValues() {
         //Given
         User user = generateClient();
-        User userWithDifferentAccounts = new User("Smith John", Gender.FEMALE, "Bucuresti");
+        User userWithDifferentAccounts = new User("Smith John", Gender.FEMALE);
         //When
         boolean clientsAreEquals = user.equals(userWithDifferentAccounts);
         //Then
@@ -41,7 +41,7 @@ public class UserTest {
     }
 
     private User generateClient(){
-        User user = new User("Smith John", Gender.MALE, "Bucuresti");
+        User user = new User("Smith John", Gender.MALE);
         user.getAccount().deposit(100);
         return user;
     }

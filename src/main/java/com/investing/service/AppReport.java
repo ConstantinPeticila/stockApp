@@ -102,9 +102,9 @@ public class AppReport {
                 .collect(Collectors.toMap(Function.identity(), User::getTrades));
     }
 
-    public static Map<String, List<User>> getUsersByCity(InvestingApp investingApp) {
-
-        return new TreeMap<>(investingApp.getUsers().stream()
-                .collect(Collectors.groupingBy(User::getCity)));
-    }
+//    public static Map<String, List<User>> getUsersByCity(InvestingApp investingApp) {
+//
+//        return new TreeMap<>(investingApp.getUsers().stream()
+//                .collect(Collectors.groupingBy(User::getCity)));
+//    }
 }
