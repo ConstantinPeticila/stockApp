@@ -7,8 +7,6 @@ import com.investing.email.EmailService;
 import com.investing.email.NotificationService;
 import com.investing.exceptions.StockExistsException;
 import com.investing.exceptions.UserExistsException;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

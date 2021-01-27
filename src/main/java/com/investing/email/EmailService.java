@@ -1,9 +1,14 @@
 package com.investing.email;
 
+import com.investing.domain.InvestingApp;
 import com.investing.exceptions.EmailException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class EmailService implements Runnable {
+
+    Logger logger = LoggerFactory.getLogger(EmailService.class);
 
     private final Queue emailQueue = new Queue();
     private Thread thread;
@@ -43,7 +48,7 @@ public class EmailService implements Runnable {
 //    }
 
     private void sendEmail(Email email) {
-        System.out.println(email);
+       logger.info(email.toString());
         sentEmails++;
     }
 

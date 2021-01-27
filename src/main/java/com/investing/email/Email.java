@@ -51,9 +51,9 @@ public class Email implements Serializable {
     @Override
     public String toString() {
         return "SEND EMAIL:" + "\n" +
-                "From: " + getFrom().getName() + "\n" +
-                "To: " + getTo().getName() + "\n" +
-                "Title: " + getTitle() + "\n" +
-                "Body: " + getBody() + "\n";
+                "               From: " + getFrom().getName() + "\n" +
+                "               To: " + getTo().getName() + "\n" +
+                "               Title: " + getTitle() + "\n" +
+                "               Body: " + getBody() + "\n";
     }
 }

@@ -8,12 +8,15 @@ import com.investing.exceptions.UserExistsException;
 import com.investing.utils.StockListener;
 import com.investing.utils.UserRegistrationListener;
 
+
 import java.util.*;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class InvestingApp {
 
-    private static final Logger LOGGER = Logger.getLogger(InvestingApp.class.getName());
+    Logger logger = LoggerFactory.getLogger(InvestingApp.class);
 
     private final Set<User> users = new HashSet<>();
     private final Set<Stock> stocks = new HashSet<>();
@@ -90,7 +93,7 @@ public class InvestingApp {
 
         @Override
         public void onStockUpdate(Stock stock, Set<User> users) {
-            System.out.println("The stock " + stock.getName() + " will be changed");
+           logger.info("The stock " + stock.getName() + " will be changed");
             if (notificationService != null) {
                 try {
                     notificationService.sendNotificationEmail(new Notification().setFrom(stock).setTo(users).setTitle("Stock changed").setBody("Stock" + stock.getName() + "price has been update from " + stock.getLastPrice() + " to value " + stock.getPrice()));
@@ -105,14 +108,13 @@ public class InvestingApp {
 
         @Override
         public void onStockUpdate(Stock stock, Set<User> users) {
-            System.out.println("The stock " + stock.getName() + " will be added");
+            logger.info("The stock " + stock.getName() + " will be added");
             if (notificationService != null) {
                 try {
                     notificationService.sendNotificationEmail(new Notification().setFrom(stock).setTo(users).setTitle("Stock added").setBody("Stock " + stock.getName() + " has been added with value " + stock.getPrice()));
                 } catch (NotificationException e) {
                     System.err.println(e.getMessage());
                 }
-                System.out.println("succes");
             }
         }
     }
@@ -121,8 +123,7 @@ public class InvestingApp {
 
         @Override
         public void onUserAdded(User user) {
-            System.out.println("Notification email for user " + user.getName() + " to be sent");
-
+            logger.info("Notification email for user " + user.getName() + " to be sent");
             if (emailService != null) {
                 try {
                     emailService.sendNotificationEmail(new Email().setFrom(system).setTo(user).setTitle(" user added notification").setBody("User added " + user));

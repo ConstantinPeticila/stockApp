@@ -8,8 +8,12 @@ import com.investing.exceptions.StockExistsException;
 import com.investing.exceptions.UserExistsException;
 import com.investing.email.EmailService;
 import com.investing.service.InvestingService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MainInvestingApp {
+
+    static Logger logger = LoggerFactory.getLogger(InvestingService.class);
 
     private static final String STATISTICS = "statistics";
     private static InvestingApp investingApp;
@@ -53,14 +57,14 @@ public class MainInvestingApp {
     }
 
     private static void printBalance() {
-        System.out.format("%nPrint balance for all users%n");
+       logger.info("%nPrint balance for all users%n");
         for (User user : investingApp.getUsers()) {
-            System.out.println("User: " + user + "Account:  %.2f%n" + user.getAccount().getBalance());
+            logger.info("User: " + user + "Account:  %.2f%n" + user.getAccount().getBalance());
         }
 
-        System.out.format("%nPrint price for all stocks%n");
+       logger.info("%nPrint price for all stocks%n");
         for (Stock stock : investingApp.getStocks()) {
-            System.out.println("stock: " + stock.getName() + " with price:  %.2f" + stock.getPrice() + " has %.2f sold actions %n" + stock.getSoldActions());
+            logger.info("stock: " + stock.getName() + " with price:  %.2f" + stock.getPrice() + " has %.2f sold actions %n" + stock.getSoldActions());
         }
     }
 

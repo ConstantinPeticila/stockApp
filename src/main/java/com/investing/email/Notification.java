@@ -55,9 +55,9 @@ public class Notification{
         }
 
         return "SEND NOTIFICATION:" + "\n" +
-                "Stock: " + getFrom().getName()+ "\n"+
-                "To: " + usersTo+ "\n" +
-                "Title: " + getTitle() + "\n" +
-                "Body: " + getBody() + "\n";
+                "              Stock: " + getFrom().getName()+ "\n"+
+                "              To: " + usersTo+ "\n" +
+                "              Title: " + getTitle() + "\n" +
+                "              Body: " + getBody() + "\n";
     }
 }

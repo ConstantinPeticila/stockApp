@@ -1,8 +1,13 @@
 package com.investing.email;
+import com.investing.domain.InvestingApp;
 import com.investing.exceptions.NotificationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class NotificationService implements Runnable {
+
+    Logger logger = LoggerFactory.getLogger(NotificationService.class);
 
     private final NotifQueue notifQueue = new NotifQueue();
     private boolean closed;
@@ -36,7 +41,7 @@ public class NotificationService implements Runnable {
     }
 
     private void sendNotification(Notification notification) {
-        System.out.println(notification);
+       logger.info(notification.toString());
         sentNotifications++;
     }
 
