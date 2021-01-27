@@ -2,9 +2,6 @@ package com.investing.email;
 
 import com.investing.domain.Stock;
 import com.investing.domain.User;
-
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Set;
 
 public class Notification{
@@ -30,13 +27,6 @@ public class Notification{
         this.to = to;
         return this;
     }
-
-//    public Notification setTo(User to) {
-//        ArrayList<User> toList = new ArrayList<>();
-//        toList.add(to);
-//        setTo(toList);
-//        return this;
-//    }
 
     public String getTitle() {
         return title;

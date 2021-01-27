@@ -5,7 +5,7 @@ import com.investing.domain.User;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Email  implements Serializable {
+public class Email implements Serializable {
 
     private static final long serialVersionUID = -3686472195559526951L;
     private User from;
@@ -52,7 +52,7 @@ public class Email  implements Serializable {
     public String toString() {
         return "SEND EMAIL:" + "\n" +
                 "From: " + getFrom().getName() + "\n" +
-                "To: " + getTo().getName() + "\n"+
+                "To: " + getTo().getName() + "\n" +
                 "Title: " + getTitle() + "\n" +
                 "Body: " + getBody() + "\n";
     }

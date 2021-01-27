@@ -1,10 +1,10 @@
 package com.investing.email;
 
-import java.io.Serializable;
+import com.investing.exceptions.EmailException;
 
-public class EmailService implements Runnable, Serializable {
 
-    private static final long serialVersionUID = -6872857384878095572L;
+public class EmailService implements Runnable {
+
     private final Queue emailQueue = new Queue();
     private Thread thread;
     private boolean closed;
@@ -19,10 +19,9 @@ public class EmailService implements Runnable, Serializable {
     public void run() {
         Email email;
         while (true) {
-            if(closed) {
+            if (closed) {
                 return;
             }
-
 
             synchronized (emailQueue) {
                 try {
@@ -39,9 +38,9 @@ public class EmailService implements Runnable, Serializable {
         }
     }
 
-    public int getSentEmails() {
-        return sentEmails;
-    }
+//    public int getSentEmails() {
+//        return sentEmails;
+//    }
 
     private void sendEmail(Email email) {
         System.out.println(email);
@@ -50,7 +49,7 @@ public class EmailService implements Runnable, Serializable {
 
     public void sendNotificationEmail(Email email) throws EmailException {
         if (!closed) {
-            synchronized(emailQueue) {
+            synchronized (emailQueue) {
                 emailQueue.add(email);
                 emailQueue.notifyAll();
             }
@@ -60,7 +59,7 @@ public class EmailService implements Runnable, Serializable {
 
     public void close() {
         closed = true;
-        synchronized(emailQueue) {
+        synchronized (emailQueue) {
             emailQueue.notify();
         }
     }

@@ -1,10 +1,9 @@
 package com.investing.email;
+import com.investing.exceptions.NotificationException;
 
-import java.io.Serializable;
 
-public class NotificationService implements Runnable, Serializable {
+public class NotificationService implements Runnable {
 
-    private static final long serialVersionUID = -6872857384878095572L;
     private final NotifQueue notifQueue = new NotifQueue();
     private boolean closed;
     private int sentNotifications = 0;
@@ -17,11 +16,11 @@ public class NotificationService implements Runnable, Serializable {
     public void run() {
         Notification notification;
         while (true) {
-            if(closed) {
+            if (closed) {
                 return;
             }
             try {
-                synchronized(notifQueue) {
+                synchronized (notifQueue) {
                     notifQueue.wait();
                 }
             } catch (InterruptedException e) {
@@ -36,28 +35,24 @@ public class NotificationService implements Runnable, Serializable {
         }
     }
 
-    public int getSentNotifications() {
-        return sentNotifications;
-    }
-
     private void sendNotification(Notification notification) {
         System.out.println(notification);
         sentNotifications++;
     }
 
-    public void sendNotificationEmail(Notification notification) throws EmailException {
+    public void sendNotificationEmail(Notification notification) throws NotificationException {
         if (!closed) {
             notifQueue.add(notification);
-            synchronized(notifQueue) {
+            synchronized (notifQueue) {
                 notifQueue.notify();
             }
         } else
-            throw new EmailException("Mailbox is closed!");
+            throw new NotificationException("Mailbox is closed!");
     }
 
     public void close() {
         closed = true;
-        synchronized(notifQueue) {
+        synchronized (notifQueue) {
             notifQueue.notify();
         }
     }

@@ -1,7 +1,6 @@
-package com.investing.email;
+package com.investing.exceptions;
 
 public class EmailException extends Exception {
-	private static final long serialVersionUID = 3523913455438905283L;
 
 	public EmailException(String message){
         super(message);

@@ -3,7 +3,6 @@ package com.investing.service;
 import com.investing.domain.InvestingApp;
 import com.investing.domain.Stock;
 import com.investing.domain.User;
-import com.investing.domain.UserAccount;
 
 import java.util.*;
 import java.util.function.Function;
@@ -36,8 +35,8 @@ public class AppReport {
 
     public static Set<User> getUsersSortedByNumberOfTrades(InvestingApp investingApp) {
         Comparator<User> sumComparator = (user1, user2) -> {
-            if(user1.getTrades().size() != user2.getTrades().size()){
-                return (int) (user1.getTrades().size()- user2.getTrades().size());
+            if (user1.getTrades().size() != user2.getTrades().size()) {
+                return -(user1.getTrades().size() - user2.getTrades().size());
             } else {
                 return -1;
             }
@@ -49,8 +48,8 @@ public class AppReport {
 
     public static Set<User> getUsersSortedByInvestedSum(InvestingApp investingApp) {
         Comparator<User> sumComparator = (user1, user2) -> {
-            if(user1.getInvestedSum() != user2.getInvestedSum()){
-                return (int) (user1.getInvestedSum() - user2.getInvestedSum());
+            if (!user1.getStocksTotalMoneySum().equals(user2.getStocksTotalMoneySum())) {
+                return (int) -(user1.getStocksTotalMoneySum() - user2.getStocksTotalMoneySum());
             } else {
                 return -1;
             }
@@ -59,9 +58,23 @@ public class AppReport {
         result.addAll(investingApp.getUsers());
         return result;
     }
+
+    public static Set<User> getUsersSortedByBalance(InvestingApp investingApp) {
+        Comparator<User> sumComparator = (user1, user2) -> {
+            if (user1.getAccount().getBalance() != user2.getAccount().getBalance()) {
+                return (int) -(user1.getAccount().getBalance() - user2.getAccount().getBalance());
+            } else {
+                return -1;
+            }
+        };
+        TreeSet<User> result = new TreeSet<>(sumComparator);
+        result.addAll(investingApp.getUsers());
+        return result;
+    }
+
     public static double getTotalSumInvestedInStocks(InvestingApp investingApp) {
         return investingApp.getUsers().stream()
-                .mapToDouble(User::getInvestedSum)
+                .mapToDouble(User::getStocksTotalMoneySum)
                 .sum();
     }
 
@@ -71,11 +84,11 @@ public class AppReport {
                 .sum();
     }
 
-    public static Set<Stock> getStockBySoldActions(InvestingApp investingApp){
+    public static Set<Stock> getStockBySoldActions(InvestingApp investingApp) {
         Comparator<Stock> sumComparator = (stock1, stock2) -> {
-            if(stock1.getSoldActions() != stock2.getSoldActions()){
-                return (int) (stock1.getSoldActions() -stock2.getSoldActions());
-            } else{
+            if (!stock1.getSoldActions().equals(stock2.getSoldActions())) {
+                return (int) (stock1.getSoldActions() - stock2.getSoldActions());
+            } else {
                 return (int) (stock1.getPrice() - stock2.getPrice());
             }
         };
@@ -84,27 +97,12 @@ public class AppReport {
         return result;
     }
 
-    public static Set<UserAccount> getAccountsSortedBySum(InvestingApp investingApp) {
-        Comparator<UserAccount> sumComparator = (account1, account2) -> {
-            if(account1.getBalance() != account2.getBalance()){
-                return (int) (account1.getBalance() - account2.getBalance());
-            } else {
-                return -1;
-            }
-        };
-        TreeSet<UserAccount> result = new TreeSet<>(sumComparator);
-       investingApp.getUsers().forEach(e -> result.add(e.getAccount()));
-        return result;
+    public static Set<Stock> getIncreasingStocks(InvestingApp investingApp) {
+        return investingApp.getStocks().stream().filter(stock -> stock.getPrice() - stock.getLastPrice() > 0).collect(Collectors.toSet());
     }
 
     public static Map<User, Map<Stock, Double>> getUsersTrades(InvestingApp investingApp) {
         return investingApp.getUsers().stream()
                 .collect(Collectors.toMap(Function.identity(), User::getTrades));
     }
-
-//    public static Map<String, List<User>> getUsersByCity(InvestingApp investingApp) {
-//
-//        return new TreeMap<>(investingApp.getUsers().stream()
-//                .collect(Collectors.groupingBy(User::getCity)));
-//    }
 }

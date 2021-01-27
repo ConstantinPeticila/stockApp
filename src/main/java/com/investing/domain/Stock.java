@@ -10,11 +10,12 @@ public class Stock {
         return observers;
     }
 
-    private Set<User> observers = new HashSet<>();
+    private final Set<User> observers = new HashSet<>();
 
     public Stock(String name, Double price) {
         this.name = name;
         this.price = price;
+        this.lastPrice = price;
     }
 
     @Override
@@ -28,7 +29,7 @@ public class Stock {
 
     private String name;
     private Double price;
-    private Double soldActions;
+    private Double soldActions = 0.0;
     private Double lastPrice;
 
     public Double getSoldActions() {
@@ -56,7 +57,7 @@ public class Stock {
         this.price = price;
     }
 
-    public void attach(User user){
+    public void attach(User user) {
         observers.add(user);
     }
 
