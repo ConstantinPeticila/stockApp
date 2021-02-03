@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.investing.domain.Gender.MALE;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class InvestingServiceTest {
 
@@ -32,6 +33,9 @@ public class InvestingServiceTest {
         investingApp.addStock(stock);
         investingApp.addStock(new Stock("IO", 32.2));
         InvestingService.printStatistics(investingApp);
+
+        assertEquals(mihai, AppReport.getUsersSortedByInvestedSum(investingApp).iterator().next());
+
     }
 
 }

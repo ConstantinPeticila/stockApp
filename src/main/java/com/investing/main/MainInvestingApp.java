@@ -57,14 +57,14 @@ public class MainInvestingApp {
     }
 
     private static void printBalance() {
-       logger.info("%nPrint balance for all users%n");
+       logger.info("Print balance for all users");
         for (User user : investingApp.getUsers()) {
-            logger.info("User: " + user + "Account:  %.2f%n" + user.getAccount().getBalance());
+            logger.info("User: " + user + "Account: " + user.getAccount().getBalance());
         }
 
-       logger.info("%nPrint price for all stocks%n");
+       logger.info("Print price for all stocks");
         for (Stock stock : investingApp.getStocks()) {
-            logger.info("stock: " + stock.getName() + " with price:  %.2f" + stock.getPrice() + " has %.2f sold actions %n" + stock.getSoldActions());
+            logger.info("stock: " + stock.getName() + " with price:  " + stock.getPrice() + " and  sold actions " + stock.getSoldActions());
         }
     }
 

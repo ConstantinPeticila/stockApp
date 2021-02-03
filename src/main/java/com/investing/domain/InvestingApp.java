@@ -55,7 +55,6 @@ public class InvestingApp {
         if (stocks.contains(stock)) {
             throw new StockExistsException("Stock already exists into the app");
         }
-
         stocks.add(stock);
         notify(stock, users, "1");
     }
@@ -96,7 +95,7 @@ public class InvestingApp {
            logger.info("The stock " + stock.getName() + " will be changed");
             if (notificationService != null) {
                 try {
-                    notificationService.sendNotificationEmail(new Notification().setFrom(stock).setTo(users).setTitle("Stock changed").setBody("Stock" + stock.getName() + "price has been update from " + stock.getLastPrice() + " to value " + stock.getPrice()));
+                    notificationService.sendNotificationEmail(new Notification().setFrom(stock).setTo(users).setTitle("Stock changed").setBody("Stock " + stock.getName() + " price has been update from " + stock.getLastPrice() + " to value " + stock.getPrice()));
                 } catch (NotificationException e) {
                     System.err.println(e.getMessage());
                 }

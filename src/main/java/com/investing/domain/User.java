@@ -5,7 +5,6 @@ import com.investing.exceptions.NotEnoughFundsException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class User {
     private final String name;
@@ -37,6 +36,10 @@ public class User {
             stock.attach(this);
         }
         this.account.stockInvest(amount);
+        setstockSoldActions(stock, amount);
+    }
+
+    private void setstockSoldActions(Stock stock, Double amount) {
         stock.setSoldActions(stock.getSoldActions() + amount / stock.getPrice());
     }
 

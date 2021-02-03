@@ -2,10 +2,9 @@ package com.investing.notifications;
 
 import com.investing.domain.Stock;
 import com.investing.domain.User;
-import com.investing.email.NotifQueue;
 import com.investing.email.Notification;
 import com.investing.email.NotificationService;
-import com.investing.exceptions.EmailException;
+import com.investing.email.Queue;
 import com.investing.exceptions.NotificationException;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +17,7 @@ public class NotificationTest {
 
     @Test
     public void noNotification() {
-        NotifQueue notifQueue = new NotifQueue();
+       Queue notifQueue = new Queue();
         assertNull(notifQueue.get());
     }
 

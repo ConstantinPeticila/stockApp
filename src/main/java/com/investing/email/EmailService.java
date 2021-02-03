@@ -1,6 +1,5 @@
 package com.investing.email;
 
-import com.investing.domain.InvestingApp;
 import com.investing.exceptions.EmailException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +9,7 @@ public class EmailService implements Runnable {
 
     Logger logger = LoggerFactory.getLogger(EmailService.class);
 
-    private final Queue emailQueue = new Queue();
+    private final Queue<Email> emailQueue = new Queue();
     private Thread thread;
     private boolean closed;
     private int sentEmails = 0;

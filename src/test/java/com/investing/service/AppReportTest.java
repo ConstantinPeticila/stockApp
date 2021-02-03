@@ -3,8 +3,6 @@ package com.investing.service;
 import com.investing.domain.InvestingApp;
 import com.investing.domain.Stock;
 import com.investing.domain.User;
-import com.investing.email.EmailService;
-import com.investing.email.NotificationService;
 import com.investing.exceptions.NotEnoughFundsException;
 import com.investing.exceptions.StockExistsException;
 import com.investing.exceptions.UserExistsException;

@@ -51,7 +51,7 @@ public class Notification{
        Set<User> users = getTo();
         StringBuilder usersTo = new StringBuilder();
         for (User c : users) {
-            usersTo.append(c.getName());
+            usersTo.append(c.getName() + "; ");
         }
 
         return "SEND NOTIFICATION:" + "\n" +

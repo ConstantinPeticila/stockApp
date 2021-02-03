@@ -9,7 +9,7 @@ public class NotificationService implements Runnable {
 
     Logger logger = LoggerFactory.getLogger(NotificationService.class);
 
-    private final NotifQueue notifQueue = new NotifQueue();
+    private final Queue<Notification> notifQueue = new Queue();
     private boolean closed;
     private int sentNotifications = 0;
 
